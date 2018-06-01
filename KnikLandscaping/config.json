@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "KnikLandscapingConnection": "Server=(localdb)\\MSSQLLocalDb;Database=KnikLandscapingDB;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
+}

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KnikLandscaping.Models
 {
-    public class Testimonials
+    public class Testimonial
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
