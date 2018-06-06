@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KnikLandscaping.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,12 +13,21 @@ namespace KnikLandscaping
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        //private IHostingEnvironment _env;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
+            //_env = env;
 
-        public IConfiguration Configuration { get; }
+            //var builder = new ConfigurationBuilder()
+            //    .SetBasePath(_env.ContentRootPath)
+            //    .AddJsonFile("config.json")
+            //    .AddEnvironmentVariables();
+
+            //configuration = builder.Build();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -26,7 +36,8 @@ namespace KnikLandscaping
 
             services.AddLogging();
 
-            services.AddDbContext<KinkLandscapingContext>();
+            services.AddDbContext<KinkLandscapingContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("KnikLandscapingConnection")));
 
             services.AddMvc();
         }
@@ -44,6 +55,7 @@ namespace KnikLandscaping
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            //searches www.root file
             app.UseStaticFiles();
 
             app.UseMvc(routes =>

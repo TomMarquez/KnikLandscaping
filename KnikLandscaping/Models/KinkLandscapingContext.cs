@@ -22,7 +22,15 @@ namespace KnikLandscaping.Models
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:KnikLandscapingConnection"]);
+            optionsBuilder.UseSqlServer(
+                "Server=(localdb)\\MSSQLLocalDb;Database=KnikLandscaping;Trusted_Connection=true;MultipleActiveResultSets=true;");
+
+            //optionsBuilder.UseSqlServer(_config["ConnectionStrings:KnikLandscapingConnection"]);
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Testimonial>().ToTable("Testimonial");
+        //}
     }
 }
