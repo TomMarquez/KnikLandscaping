@@ -39,11 +39,15 @@ namespace KnikLandscaping
             services.AddDbContext<KinkLandscapingContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("KnikLandscapingConnection")));
 
+            services.AddTransient<KnikLandScapingSeedData>();
+
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env,
+            KnikLandScapingSeedData seeder)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +68,8 @@ namespace KnikLandscaping
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            seeder.EnsureSeedData().Wait();
         }
     }
 }

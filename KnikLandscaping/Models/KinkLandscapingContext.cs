@@ -18,12 +18,14 @@ namespace KnikLandscaping.Models
         public DbSet<Testimonial> Testimonials { get; set; }
         private IConfiguration _config;
 
+        // To add migration in PMC: add-migration <nameOfMigration>
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(
-                "Server=(localdb)\\MSSQLLocalDb;Database=KnikLandscaping;Trusted_Connection=true;MultipleActiveResultSets=true;");
+            //optionsBuilder.UseSqlServer(
+              //  "Server=(localdb)\\MSSQLLocalDb;Database=KnikLandscaping;Trusted_Connection=true;MultipleActiveResultSets=true;");
 
             //optionsBuilder.UseSqlServer(_config["ConnectionStrings:KnikLandscapingConnection"]);
         }
