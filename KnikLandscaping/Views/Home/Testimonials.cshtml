@@ -1,7 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Testimonials";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <row>
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="center-block">
+                        <h1 class="center-block">Testimonials</h1>
+                    </div>
+                </div>
+            </row>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="well">
+
+            </div>
+
+        }
+
+    </div>
+</div>
