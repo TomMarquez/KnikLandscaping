@@ -2,15 +2,13 @@
     ViewData["Title"] = "Testimonials";
 }
 
-<p>Use this area to provide additional information.</p>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <row>
                 <div class="col-md-6 col-md-offset-3">
                     <div class="center-block">
-                        <h1 class="center-block">Testimonials</h1>
+                        <h1 class="center-block text-center">Testimonials</h1>
                     </div>
                 </div>
             </row>
@@ -23,7 +21,8 @@
         @foreach (var item in Model)
         {
             <div class="well">
-
+                <h2 class="text-center">@item.FirstName @item.LastName says...</h2>
+                <p class="text-center">"@item.Content"</p>
             </div>
 
         }
