@@ -6,25 +6,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using KnikLandscaping.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using KnikLandscaping.ViewModels;
 
 namespace KnikLandscaping.Controllers
 {
     public class HomeController : Controller
     {
         private IConfiguration _config;
-
         private KinkLandscapingContext _context;
+        private ILogger<HomeController> _logger;
 
-        public HomeController(IConfiguration config, KinkLandscapingContext context)
+        public HomeController(IConfiguration config, KinkLandscapingContext context,
+            ILogger<HomeController> logger)
         {
             _config = config;
             _context = context;
+            _logger = logger;
         }
         public IActionResult Index()
         {
-            //var data = _context.Testimonials.ToList(); // query the database
-            //return View(data);
-            return View();
+            try
+            {
+                var data = _context.Testimonials.ToList(); // query the database
+                var vm = new TestimonialsViewModel();
+
+                vm.testimonials = data;
+                return View(data);
+            }
+            catch (Exception e)
+            {
+                //log exception
+                _logger.LogError($"Failed to get modules: {e.Message}");
+                return Redirect("/error");
+            }
         }
 
         public IActionResult About()
@@ -43,9 +58,17 @@ namespace KnikLandscaping.Controllers
 
         public IActionResult Testimonials()
         {
-            ViewData["Message"] = "Testimonials";
-
-            return View();
+            try
+            {
+                var data = _context.Testimonials.ToList(); // query the database
+                return View(data);
+            }
+            catch (Exception e)
+            {
+                //log exception
+                _logger.LogError($"Failed to get modules: {e.Message}");
+                return Redirect("/error");
+            }
         }
 
         public IActionResult Error()
