@@ -69,7 +69,7 @@ namespace KnikLandscaping
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            seeder.EnsureSeedData().Wait();
+            //seeder.EnsureSeedData().Wait();
         }
     }
 }
